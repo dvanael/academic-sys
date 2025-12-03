@@ -1,6 +1,4 @@
-from rest_framework import viewsets, views
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import viewsets
 from .serializers import StudentSerializer, CourseSerializer
 from data.models import Student, Course
 
