@@ -10,9 +10,12 @@ router.register(r"courses", viewsets.CourseViewSet, "course")
 
 urlpatterns = [
     path(r"", include(router.urls)),
+    # Enrollments
     path("enrollments/create/", views.EnrollmentCreateView.as_view()),
     path("enrollments/<int:enrollment_id>/pay/", views.EnrollmentPayView.as_view()),
     path(
         "students/<int:student_id>/enrollments/", views.StudentEnrollmentsView.as_view()
     ),
+    # Reports
+    path("report/enrollments-per-course/", views.ReportEnrollmentsPerCourse.as_view()),
 ]

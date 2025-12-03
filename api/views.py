@@ -1,7 +1,8 @@
+from django.db.models import Count
 from rest_framework import views
 from rest_framework.response import Response
 from .serializers import EnrollmentSerializer
-from data.models import Enrollment
+from data.models import Course, Enrollment
 
 
 class EnrollmentCreateView(views.APIView):
@@ -30,3 +31,11 @@ class EnrollmentPayView(views.APIView):
         enrollment.save()
         serializer = EnrollmentSerializer(enrollment, many=False)
         return Response(serializer.data)
+
+
+class ReportEnrollmentsPerCourse(views.APIView):
+    def get(self, request):
+        data = Course.objects.annotate(total=Count("enrollment")).values(
+            "id", "name", "total"
+        )
+        return Response(data)
