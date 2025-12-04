@@ -2,7 +2,7 @@ from django import forms
 from data.models import Course
 
 
-class CoursetForm(forms.ModelForm):
+class CourseForm(forms.ModelForm):
 
     class Meta:
         model = Course

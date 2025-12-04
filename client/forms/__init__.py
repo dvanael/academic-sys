@@ -1,2 +1,2 @@
 from .student import StudentForm
-from .course import CoursetForm
+from .course import CourseForm

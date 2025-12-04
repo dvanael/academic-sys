@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from data.models.student import Student
+from data.models import Student
 from client.forms import StudentForm
 
 
