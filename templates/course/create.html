@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar Curso{% endblock title %}
+
+{% block content %}
+<main>
+  <h2>Cadastrar Curso</h2>
+  <form action="{% url 'course-create' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Cadastrar</button>
+  </form>
+</main>
+{% endblock content %}
