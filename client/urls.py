@@ -10,4 +10,7 @@ urlpatterns = [
         views.EnrollmentCreateView.as_view(),
         name="enrollment-create",
     ),
+    path(
+        "matriculas/listar/", views.EnrollmentListView.as_view(), name="enrollment-list"
+    ),
 ]
