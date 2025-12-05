@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Matriculas{% endblock title %}
+{% block content %}
+<main>
+  <h2>Matriculas</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>Aluno</td>
+        <td>Curso</td>
+        <td>Pagamento</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in enrollments %}
+        <tr>
+          <td>{{e.student_id.name}}</td>
+          <td>{{e.course_id.name}}</td>
+          <td>{% if e.status %}Pago{% else %}Pendente{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+</main>
+{% endblock content %}
