@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Histórico do Aluno{% endblock title %}
+
+{% block content %}
+<main>
+  <h2>Histórico de {{student.name}}</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>Cursos Matriculados</td>
+        <td>Status</td>
+        <td>Valor Pendente (R$)</td>
+        <td>Valor Pago (R$)</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in student.enrollments.all %}
+        <tr>
+          <td>{{e.course_id.name}}</td>
+          <td>{% if e.status %}Pago {% else %}Pendente {% endif %}</td>
+          <td>{% if e.status %}0{% else %}{{ e.course_id.enrollment_fee }}{% endif %}</td>
+          <td>{% if e.status %}{{ e.course_id.enrollment_fee }}{% else %}0{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+</main>
+{% endblock content %}
