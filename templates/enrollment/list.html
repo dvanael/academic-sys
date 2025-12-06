@@ -20,7 +20,26 @@
         </tr>
       {% endfor %}
     </tbody>
+  </table>
 
+  <h2>Pagamentos</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>Aluno</td>
+        <td>Total Pago (R$)</td>
+        <td>Total Devido (R$)</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in payments %}
+        <tr>
+          <td>{{p.name}}</td>
+          <td>{{p.paid_total}}</td>
+          <td>{{p.pending_total}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
   </table>
 </main>
 {% endblock content %}
