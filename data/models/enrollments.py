@@ -4,8 +4,12 @@ from .course import Course
 
 
 class Enrollment(models.Model):
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student_id = models.ForeignKey(
+        Student, on_delete=models.CASCADE, related_name="enrollments"
+    )
+    course_id = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="enrollments"
+    )
     enrollment_date = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=False)  # True, Pago; False, Pendente
 
