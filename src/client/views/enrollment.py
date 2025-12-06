@@ -19,21 +19,19 @@ class EnrollmentListView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["enrollments"] = Enrollment.objects.all()
 
-        payments = []
-        for s in Student.objects.all():
-            enrollmets = Enrollment.objects.filter(student_id=s.id)
-            paid_total = 0
-            pending_total = 0
-            for e in enrollmets:
-                if e.status:
-                    paid_total += e.course_id.enrollment_fee
-                else:
-                    pending_total += e.course_id.enrollment_fee
-            data = {
-                "name": s.name,
-                "paid_total": paid_total,
-                "pending_total": pending_total,
-            }
-            payments.append(data)
+        sql = """
+            SELECT
+                s.id,
+                s.name,
+                SUM(CASE WHEN e.status = TRUE THEN c.enrollment_fee ELSE 0 END) AS paid_total,
+                SUM(CASE WHEN e.status = FALSE THEN c.enrollment_fee ELSE 0 END) AS pending_total
+            FROM student s
+            LEFT JOIN enrollment e ON e.student_id = s.id
+            LEFT JOIN course c ON e.course_id = c.id
+            GROUP BY s.id, s.name
+            ORDER BY s.name;
+        """
+
+        payments = Student.objects.raw(sql)
         context["payments"] = payments
         return context
