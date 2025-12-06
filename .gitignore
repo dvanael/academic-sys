@@ -7,3 +7,6 @@ media
 .env
 env
 .vscode
+vol
+volume
+staticfiles
