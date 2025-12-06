@@ -3,5 +3,18 @@
 {% block title %}Inicial{% endblock title %}
 
 {% block content %}
-<p>Página Inicial</p>
+<h2>Dashboard Geral</h2>
+
+<p>Cursos Ativos</p>
+<ol>
+  {% for c in active_courses %}
+    <li>{{c.name}}</li>
+  {% endfor %}
+</ol>
+
+<p>Total de Estudantes: {{count_students}}</p>
+
+<p>Pagamentos Pendentes Vs. Pagos</p>
+<p>{{pending_enrollments}} - {{paid_enrollments}}</p>
+
 {% endblock content %}
