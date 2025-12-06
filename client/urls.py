@@ -13,4 +13,9 @@ urlpatterns = [
     path(
         "matriculas/listar/", views.EnrollmentListView.as_view(), name="enrollment-list"
     ),
+    path(
+        "alunos/<int:pk>/historico/",
+        views.StudentHistoryView.as_view(),
+        name="student-history",
+    ),
 ]
