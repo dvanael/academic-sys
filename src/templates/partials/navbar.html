@@ -1,0 +1,17 @@
+{% load static %}
+<nav class="navbar">
+  <h1>Academic System</h1>
+  <ul class="navbar-menu">
+
+    <li><a href="{% url 'index' %}">Início</a></li>
+
+    <li><a href="{% url 'student-create' %}">Cadastrar Aluno</a></li>
+
+    <li><a href="{% url 'course-create' %}">Cadastrar Curso</a></li>
+
+    <li><a href="{% url 'enrollment-create' %}">Cadastrar Matrícula</a></li>
+
+    <li><a href="{% url 'enrollment-list' %}">Listar Matrículas</a></li>
+
+  </ul>
+</nav>

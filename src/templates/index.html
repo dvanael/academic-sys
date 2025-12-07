@@ -1,20 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Inicial{% endblock title %}
+{% block title %}Dashboard Geral{% endblock title %}
 
 {% block content %}
 <h2>Dashboard Geral</h2>
 
-<p>Cursos Ativos</p>
-<ol>
-  {% for c in active_courses %}
-    <li>{{c.name}}</li>
-  {% endfor %}
-</ol>
+<hr>
 
-<p>Total de Estudantes: {{count_students}}</p>
+<section>
+  <h3>Cursos Ativos</h3>
+  {% if active_courses %}
+    <ul>
+      {% for c in active_courses %}
+        <li>{{ c.name }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Nenhum curso ativo encontrado.</p>
+  {% endif %}
+</section>
 
-<p>Pagamentos Pendentes Vs. Pagos</p>
-<p>{{pending_enrollments}} - {{paid_enrollments}}</p>
+<hr>
+
+<section>
+  <h3>Total de Estudantes</h3>
+  <p><strong>{{ count_students }}</strong> estudantes cadastrados.</p>
+</section>
+
+<hr>
+
+<section>
+  <h3>Status de Pagamentos</h3>
+
+  <p><strong>Pagamentos Pendentes:</strong> {{ pending_enrollments }}</p>
+  <p><strong>Pagamentos Pagos:</strong> {{ paid_enrollments }}</p>
+
+  {% with total=pending_enrollments|add:paid_enrollments %}
+    {% if total > 0 %}
+      {% widthratio paid_enrollments total 100 as paid_percent %}
+      <div class="payment-progress">
+        <div class="progress-bar" style="width: {{ paid_percent }}%"></div>
+      </div>
+      <small>Barra representa a porcentagem de matrículas pagas.</small>
+    {% endif %}
+  {% endwith %}
+</section>
 
 {% endblock content %}

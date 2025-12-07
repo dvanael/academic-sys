@@ -1,45 +1,65 @@
 {% extends "base.html" %}
-{% block title %}Matriculas{% endblock title %}
+{% load static %}
+
+{% block title %}Matrículas{% endblock title %}
+
 {% block content %}
 <main>
-  <h2>Matriculas</h2>
+  <h2>Matrículas</h2>
+
   <table>
     <thead>
       <tr>
-        <td>Aluno</td>
-        <td>Curso</td>
-        <td>Pagamento</td>
+        <th>Aluno</th>
+        <th>Curso</th>
+        <th>Pagamento</th>
       </tr>
     </thead>
     <tbody>
       {% for e in enrollments %}
         <tr>
-          <td>{{e.student_id.name}}</td>
-          <td>{{e.course_id.name}}</td>
-          <td>{% if e.status %}Pago{% else %}Pendente{% endif %}</td>
+          <td>{{ e.student.name }}</td>
+          <td>{{ e.course.name }}</td>
+          <td>
+            {% if e.status == "pago" %}
+              Pago
+            {% else %}
+              Pendente
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">Nenhuma matrícula encontrada.</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 
   <h2>Pagamentos</h2>
+
   <table>
     <thead>
       <tr>
-        <td>Aluno</td>
-        <td>Total Pago (R$)</td>
-        <td>Total Devido (R$)</td>
+        <th>Aluno</th>
+        <th>Total Pago (R$)</th>
+        <th>Total Devido (R$)</th>
       </tr>
     </thead>
     <tbody>
       {% for p in payments %}
         <tr>
-          <td>{{p.name}}</td>
-          <td>{{p.paid_total}}</td>
-          <td>{{p.pending_total}}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.paid_total }}</td>
+          <td>{{ p.pending_total }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">Nenhum registro financeiro encontrado.</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+
 </main>
 {% endblock content %}

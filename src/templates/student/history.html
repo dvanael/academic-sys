@@ -1,26 +1,57 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Histórico do Aluno{% endblock title %}
 
 {% block content %}
 <main>
-  <h2>Histórico de {{student.name}}</h2>
+  <h2>Histórico de {{ student.name }}</h2>
+
   <table>
     <thead>
       <tr>
-        <td>Cursos Matriculados</td>
-        <td>Status</td>
-        <td>Valor Pendente (R$)</td>
-        <td>Valor Pago (R$)</td>
+        <th>Curso</th>
+        <th>Status</th>
+        <th>Valor Pendente (R$)</th>
+        <th>Valor Pago (R$)</th>
       </tr>
     </thead>
+
     <tbody>
       {% for e in student.enrollments.all %}
+        {% with valor=e.course.enrollment_fee %}
         <tr>
-          <td>{{e.course_id.name}}</td>
-          <td>{% if e.status %}Pago {% else %}Pendente {% endif %}</td>
-          <td>{% if e.status %}0{% else %}{{ e.course_id.enrollment_fee }}{% endif %}</td>
-          <td>{% if e.status %}{{ e.course_id.enrollment_fee }}{% else %}0{% endif %}</td>
+          <td>{{ e.course.name }}</td>
+
+          <td>
+            {% if e.status == "pago" %}
+              Pago
+            {% else %}
+              Pendente
+            {% endif %}
+          </td>
+
+          <td>
+            {% if e.status == "pago" %}
+              0
+            {% else %}
+              {{ valor }}
+            {% endif %}
+          </td>
+
+          <td>
+            {% if e.status == "pago" %}
+              {{ valor }}
+            {% else %}
+              0
+            {% endif %}
+          </td>
+
+        </tr>
+        {% endwith %}
+      {% empty %}
+        <tr>
+          <td colspan="4">Nenhuma matrícula encontrada para este aluno.</td>
         </tr>
       {% endfor %}
     </tbody>
