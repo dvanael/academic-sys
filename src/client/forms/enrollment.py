@@ -6,4 +6,4 @@ class EnrollmentForm(forms.ModelForm):
 
     class Meta:
         model = Enrollment
-        fields = ["student_id", "course_id", "status"]
+        fields = ["student", "course", "status"]

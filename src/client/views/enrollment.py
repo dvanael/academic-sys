@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, TemplateView
-from data.models import Enrollment, Course, Student
+from data.models import Enrollment, Student
 from typing import Any
 from client.forms import EnrollmentForm
 
@@ -20,14 +20,12 @@ class EnrollmentListView(TemplateView):
         context["enrollments"] = Enrollment.objects.all()
 
         sql = """
-            SELECT
-                s.id,
-                s.name,
+            SELECT s.id, s.name,
                 SUM(CASE WHEN e.status = TRUE THEN c.enrollment_fee ELSE 0 END) AS paid_total,
                 SUM(CASE WHEN e.status = FALSE THEN c.enrollment_fee ELSE 0 END) AS pending_total
-            FROM student s
-            LEFT JOIN enrollment e ON e.student_id = s.id
-            LEFT JOIN course c ON e.course_id = c.id
+            FROM data_student s
+            LEFT JOIN data_enrollment e ON e.student_id = s.id
+            LEFT JOIN data_course c ON e.course_id = c.id
             GROUP BY s.id, s.name
             ORDER BY s.name;
         """

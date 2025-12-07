@@ -3,6 +3,8 @@ from data.models import Enrollment
 
 
 class EnrollmentSerializer(serializers.ModelSerializer):
+    enrollment_date = serializers.DateTimeField(format="%d/%m/%Y %H:%M")
+
     class Meta:
         model = Enrollment
-        fields = ["id", "student_id", "course_id", "enrollment_date", "status"]
+        fields = ["id", "student", "course", "enrollment_date", "status"]

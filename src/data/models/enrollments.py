@@ -4,10 +4,10 @@ from .course import Course
 
 
 class Enrollment(models.Model):
-    student_id = models.ForeignKey(
+    student = models.ForeignKey(
         Student, on_delete=models.CASCADE, related_name="enrollments"
     )
-    course_id = models.ForeignKey(
+    course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="enrollments"
     )
     enrollment_date = models.DateTimeField(auto_now_add=True)
@@ -16,8 +16,8 @@ class Enrollment(models.Model):
     class Meta:
         verbose_name = "Enrollment"
         verbose_name_plural = "Enrollments"
-        unique_together = ("student_id", "course_id")
+        unique_together = ("student", "course")
 
     def __str__(self):
         status = "Pago" if self.status else "Pendente"
-        return f"Matricula de {self.student_id.name} em {self.course_id.name}. {status}"
+        return f"Matricula de {self.student.name} em {self.course.name}. {status}"

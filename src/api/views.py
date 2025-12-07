@@ -15,7 +15,7 @@ class EnrollmentCreateView(views.APIView):
 
 class StudentEnrollmentsView(views.APIView):
     def get(self, request, student_id):
-        enrollments = Enrollment.objects.filter(student_id=student_id)
+        enrollments = Enrollment.objects.filter(student=student_id)
         serializer = EnrollmentSerializer(enrollments, many=True)
         return Response(serializer.data)
 
