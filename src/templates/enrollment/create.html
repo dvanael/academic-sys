@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Matricular Aluno{% endblock title %}
-
+{% block style %}
+<link rel="stylesheet" href="{% static "css/checkbox.css" %}">
+{% endblock style %}
 {% block content %}
 <main>
   <h2>Matricular Aluno</h2>
@@ -11,4 +13,10 @@
     <button type="submit">Cadastrar</button>
   </form>
 </main>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const checkbox = document.querySelector("#id_status");
+    if (checkbox) checkbox.setAttribute("data-mode", "active");
+  });
+</script>
 {% endblock content %}
