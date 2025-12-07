@@ -1,0 +1,44 @@
+/* Alinha label, checkbox e texto lado a lado */
+p:has(input[type="checkbox"]) {
+  display: inline;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Remove width automático dos labels nesses casos */
+p:has(input[type="checkbox"]) > label {
+  width: auto;
+  margin: 0;
+}
+
+/* Cria o texto dinâmico ao lado */
+p:has(input[type="checkbox"])::after {
+  content: "Pendente"; /* texto padrão */
+  font-weight: bold;
+}
+
+/* Quando o checkbox está marcado → troca o texto */
+p:has(input[type="checkbox"]:checked)::after {
+  content: "Pago";
+}
+
+
+/* Default → Pendente/Pago */
+p:has(input[type="checkbox"])::after {
+  content: "Pendente";
+}
+
+p:has(input[type="checkbox"]:checked)::after {
+  content: "Pago";
+}
+
+/* Modo 'active' → Inativo/Ativo */
+p:has(input[type="checkbox"][data-mode="active"])::after {
+  content: "Inativo" !important;
+}
+
+p:has(input[type="checkbox"][data-mode="active"]:checked)::after {
+  content: "Ativo" !important;
+}
