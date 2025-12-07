@@ -24,7 +24,7 @@ class EnrollmentListView(TemplateView):
                 SUM(CASE WHEN e.status = TRUE THEN c.enrollment_fee ELSE 0 END) AS paid_total,
                 SUM(CASE WHEN e.status = FALSE THEN c.enrollment_fee ELSE 0 END) AS pending_total
             FROM data_student s
-            LEFT JOIN data_enrollment e ON e.student_id = s.id
+            INNER JOIN data_enrollment e ON e.student_id = s.id
             LEFT JOIN data_course c ON e.course_id = c.id
             GROUP BY s.id, s.name
             ORDER BY s.name;
