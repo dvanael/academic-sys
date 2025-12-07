@@ -16,6 +16,19 @@ Este projeto implementa gerenciamento de **Alunos**, **Cursos**, **Matrículas**
 * Docker
 * Docker Compose
 
+Crie um arquivo `.env` com base no `.env.sample`.
+```
+SECRET_KEY=CHANGE-ME
+DEBUG=False
+ALLOWED_HOSTS=localhost,127.0.0.1
+DB_ENGINE="django.db.backends.postgresql"
+POSTGRES_DB="change-me"
+POSTGRES_USER="change-me"
+POSTGRES_PASSWORD="change-me"
+POSTGRES_HOST="change-me"
+POSTGRES_PORT="5432"
+```
+
 Execute:
 
 ```bash
