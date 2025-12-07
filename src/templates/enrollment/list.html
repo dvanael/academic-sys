@@ -21,7 +21,7 @@
           <td>{{ e.student.name }}</td>
           <td>{{ e.course.name }}</td>
           <td>
-            {% if e.status == "pago" %}
+            {% if e.status == True %}
               Pago
             {% else %}
               Pendente
